@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #97d8b3;
+        }
+        h1 {
+            text-align: center;
+        }
+        input[type=text] {
+            width: 300px;
+            height: 30px;
+        }
+        input[type=submit] {
+            width: 100px;
+            height: 30px;
+        }
+        .fixed-width {
+            width: 300px; /* Set the desired width */
+            resize: none;
+        }
+        section{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 100px;
+        }
+
+
+
+    </style>
+</head>
+<body>
+<section>
+    <div id="todos">
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="add">
+    </form>
+</div>
+
+  
+    
+    <table border="1" cellpadding="5">
+        <tr>
+            
+            <th>title</th>
+            <th>description</th>
+            <th></th>
+            <th></th>
+        </tr>
+        {% for list in todos %}
+        <tr>
+            
+            <td>{{list.title}}</td>
+            <td>{{list.description}}</td>
+            <td><a href="{% url 'update' list.id %}">update</a></td>
+            <td><a href="{% url 'delete' list.id %}">delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</section>
+<a href="{% url 'logout' %}"><button>logout</button></a>
+
+    
+    
+</body>
+</html>
